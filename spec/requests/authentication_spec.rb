@@ -14,7 +14,7 @@ RSpec.describe 'Authentication', type: :request do
       {
         email: Faker::Internet.email,
         password: Faker::Internet.password
-    }.to_json
+      }.to_json
     end
 
     context 'when request is valid' do
