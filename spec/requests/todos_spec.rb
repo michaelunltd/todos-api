@@ -62,14 +62,14 @@ RSpec.describe 'Todos API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/todos', params: { title: 'Nothing' }, headers: headers }
+      before { post '/todos', params: {} , headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to match(/Validation failed: Created by can't be blank/)
+        expect(response.body).to match(/Validation failed: Title can't be blank/)
       end
     end
   end
@@ -115,7 +115,7 @@ RSpec.describe 'Todos API', type: :request do
 
     context 'when the record does not exists' do
       let(:todo_id){ 0 }
-      before { delete "/todos/#{todo_id}" }
+      before { delete "/todos/#{todo_id}", params: {}, headers: headers }
 
       it 'returns the status code 404' do
         expect(response).to have_http_status(404)
